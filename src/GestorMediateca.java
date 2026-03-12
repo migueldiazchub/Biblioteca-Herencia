@@ -187,6 +187,7 @@ public class GestorMediateca {
                         break;
                 }
             } catch (Exception e) {
+                scanner.nextLine(); //Esta línea es para que no entre en un bucle de lanzar errores
                 errorGenerico();
             }
         }
