@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -8,8 +7,6 @@ public class GestorMediateca {
     }
 
     public static void main(String[] args){
-
-
         Scanner scanner = new Scanner(System.in);
 
         //Lista de ejemplo
