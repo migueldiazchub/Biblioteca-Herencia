@@ -26,6 +26,7 @@ public class GestorMediateca {
                     "6. Salir\n"
             );
             int opcionMenu = scanner.nextInt();
+            scanner.nextLine(); //Si no se añade esta línea, la siguiente no esperará a recibir el input
 
             switch(opcionMenu) {
                 case 1: //Mostrar catálogo
@@ -54,7 +55,7 @@ public class GestorMediateca {
                         }
                     }
                     if(idExiste){
-                        System.out.println("Ya existe un ítem con ese ID");
+                        System.out.println("Ya existe un ítem con ese ID.");
                         break;
                     }
 
@@ -63,7 +64,7 @@ public class GestorMediateca {
 
                     switch(opcionTipoItem){
                         case 1:
-                            System.out.println("Escribe el autor del nuevo ítem");
+                            System.out.println("Escribe el autor del nuevo ítem: ");
                             String nuevoAutor = scanner.nextLine();
 
                             listaMediateca.add(new Libro(nuevoId, nuevoTitulo, nuevoAutor));
@@ -71,7 +72,7 @@ public class GestorMediateca {
                             break;
 
                         case 2:
-                            System.out.println("Escribe el número de edición del nuevo ítem");
+                            System.out.println("Escribe el número de edición del nuevo ítem: ");
                             int nuevoNumeroEdicion = scanner.nextInt();
 
                             listaMediateca.add(new Revista(nuevoId, nuevoTitulo, nuevoNumeroEdicion));
@@ -79,7 +80,7 @@ public class GestorMediateca {
                             break;
 
                         case 3:
-                            System.out.println("Escribe el director del nuevo ítem");
+                            System.out.println("Escribe el director del nuevo ítem: ");
                             String nuevoDirector = scanner.nextLine();
 
                             listaMediateca.add(new DVD(nuevoId, nuevoTitulo, nuevoDirector));
@@ -89,20 +90,37 @@ public class GestorMediateca {
                         case 4:
                             break;
                     }
-
                     break;
 
                 case 3: //Modificar título
+                    System.out.println("Escribe el ID del ítem a modificar: ");
+                    String idModificar = scanner.nextLine();
+                    Boolean modificarExiste = false;
+
+                    for(int i = 0; i < listaMediateca.size(); i++){
+                        ItemBiblioteca item = listaMediateca.get(i);
+                        if(idModificar.equals(item.getId())){
+                            modificarExiste = true;
+                            System.out.println("Escribe el nuevo título del ítem: ");
+                            String modificarTitulo = scanner.nextLine();
+                            item.setTitulo(modificarTitulo);
+                            break;
+                        }
+                    }
+                    if(!modificarExiste){
+                        System.out.println("No existe ningún ítem con este ID.");
+                        break;
+                    }
+
                     break;
 
                 case 4: //Prestar ítem
                     System.out.println("Escribe el ID del ítem a prestar: ");
-                    scanner.nextLine(); //Si no se añade esta línea, la siguiente no esperará a recibir el input
                     String idPrestar = scanner.nextLine();
                     Boolean prestarExiste = false;
 
                     for(int i = 0; i < listaMediateca.size(); i++){
-                        ItemBiblioteca item = (listaMediateca.get(i));
+                        ItemBiblioteca item = listaMediateca.get(i);
                         if(idPrestar.equals(item.getId())){
                             prestarExiste = true;
 
@@ -118,18 +136,17 @@ public class GestorMediateca {
                         }
                     }
                     if(!prestarExiste) {
-                        System.out.println("No existe ningún item con este ID.");
+                        System.out.println("No existe ningún ítem con este ID.");
                     }
                     break;
 
                 case 5: //Devolver ítem
                     System.out.println("Escribe el ID del ítem a devolver: ");
-                    scanner.nextLine(); //Si no se añade esta línea, la siguiente no esperará a recibir el input
                     String idDevolver = scanner.nextLine();
                     Boolean devolverExiste = false;
 
                     for(int i = 0; i < listaMediateca.size(); i++){
-                        ItemBiblioteca item = (listaMediateca.get(i));
+                        ItemBiblioteca item = listaMediateca.get(i);
                         if(idDevolver.equals(item.getId())){
                             devolverExiste = true;
 
@@ -148,12 +165,11 @@ public class GestorMediateca {
                             } else {
                                 System.out.println("El ítem se devolvió dentro del plazo.");
                             }
-
                             break;
                         }
                     }
                     if(!devolverExiste) {
-                        System.out.println("No existe ningún item con este ID.");
+                        System.out.println("No existe ningún ítem con este ID.");
                     }
                     break;
 
