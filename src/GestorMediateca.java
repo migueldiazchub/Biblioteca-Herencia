@@ -5,6 +5,7 @@ public class GestorMediateca {
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
 
+        //Lista de ejemplo
         ArrayList<ItemBiblioteca> listaMediateca = new ArrayList<>();
         listaMediateca.add(new Libro("1001", "El Rey de Amarillo", "Robert W. Chambers"));
         listaMediateca.add(new Libro("1002", "La Sombra sobre Innsmouth", "H. P. Lovecraft"));
@@ -40,9 +41,54 @@ public class GestorMediateca {
                             "3. DVD\n" +
                             "4. Atrás\n"
                     );
-                    int opcionAnadir = scanner.nextInt();
+                    int opcionTipoItem = scanner.nextInt();
+                    scanner.nextLine(); //Si no se añade esta línea, la siguiente no esperará a recibir el input
 
-                    switch(opcionAnadir){}
+                    System.out.println("Escribe el ID del nuevo ítem: ");
+                    String nuevoId = scanner.nextLine();
+                    Boolean idExiste = false;
+                    for(int i = 0; i < listaMediateca.size(); i++){
+                        if(nuevoId.equals(listaMediateca.get(i).getId())){
+                            idExiste = true;
+                            break;
+                        }
+                    }
+                    if(idExiste){
+                        System.out.println("Ya existe un ítem con ese ID");
+                        break;
+                    }
+
+                    System.out.println("Escribe el título del nuevo ítem: ");
+                    String nuevoTitulo = scanner.nextLine();
+
+                    switch(opcionTipoItem){
+                        case 1:
+                            System.out.println("Escribe el autor del nuevo ítem");
+                            String nuevoAutor = scanner.nextLine();
+
+                            listaMediateca.add(new Libro(nuevoId, nuevoTitulo, nuevoAutor));
+
+                            break;
+
+                        case 2:
+                            System.out.println("Escribe el número de edición del nuevo ítem");
+                            int nuevoNumeroEdicion = scanner.nextInt();
+
+                            listaMediateca.add(new Revista(nuevoId, nuevoTitulo, nuevoNumeroEdicion));
+
+                            break;
+
+                        case 3:
+                            System.out.println("Escribe el director del nuevo ítem");
+                            String nuevoDirector = scanner.nextLine();
+
+                            listaMediateca.add(new DVD(nuevoId, nuevoTitulo, nuevoDirector));
+
+                            break;
+
+                        case 4:
+                            break;
+                    }
 
                     break;
 
@@ -113,6 +159,10 @@ public class GestorMediateca {
 
                 case 6: //Salir
                     program = false;
+                    break;
+
+                default:
+                    System.out.println("No es una opción válida");
                     break;
             }
         }
