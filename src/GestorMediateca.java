@@ -5,14 +5,13 @@ public class GestorMediateca {
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
 
-        ItemBiblioteca libro1 = new Libro("101", "Mondgohongo", "manuel");
-        ItemBiblioteca revista1 = new Revista("201", "Mondgohongo", 2);
-        ItemBiblioteca dvd1 = new DVD("301", "Mondgohongo", "manuel");
-
         ArrayList<ItemBiblioteca> listaMediateca = new ArrayList<>();
-        listaMediateca.add(libro1);
-        listaMediateca.add(revista1);
-        listaMediateca.add(dvd1);
+        listaMediateca.add(new Libro("1001", "El Rey de Amarillo", "Robert W. Chambers"));
+        listaMediateca.add(new Libro("1002", "La Sombra sobre Innsmouth", "H. P. Lovecraft"));
+        listaMediateca.add(new Revista("2001", "National Geographic", 23));
+        listaMediateca.add(new Revista("2002", "Vogue", 12));
+        listaMediateca.add(new DVD("3001", "La Cosa", "John Carpenter"));
+        listaMediateca.add(new DVD("3002", "Cloverfield", "Matt Reeves"));
 
         Boolean program = true;
         while(program){
@@ -67,7 +66,7 @@ public class GestorMediateca {
                             }
 
                             item.prestar();
-                            System.out.println("Se va a prestar un ejemplar de " + item.getTitulo() + "\n" +
+                            System.out.println("Se ha prestado un ejemplar de " + item.getTitulo() + "\n" +
                                     "Se podrá devolver en un plazo de " + item.getDiasMaximosPrestamo() + " días.");
                             break;
                         }
@@ -100,6 +99,8 @@ public class GestorMediateca {
                             if(diasRetraso > 0){
                                 System.out.println("El ítem se devolvió fuera de plazo por " + diasRetraso + " días.\n" +
                                         "La multa a pagar es de " + item.calcularMulta(diasRetraso) + " euros.");
+                            } else {
+                                System.out.println("El ítem se devolvió dentro del plazo.");
                             }
 
                             break;
